@@ -1,5 +1,5 @@
 {
-  "prayer_zone": "TRG04",
-  "azan": true,
-  "reduced_motion": true
+    "prayer_zone":  "SMD01",
+    "reduced_motion":  true,
+    "azan":  true
 }

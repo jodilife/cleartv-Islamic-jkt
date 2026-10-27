@@ -30,11 +30,11 @@ final class PrayerTimes {
     private static final long RETRY_MS = 60L * 60 * 1000;
     /** JAKIM's keys, in the order the row shows them. */
     private static final String[] KEYS = {"fajr", "dhuhr", "asr", "maghrib", "isha"};
-    static final String[] NAMES = {"Subuh", "Zohor", "Asar", "Maghrib", "Isyak"};
+    static final String[] NAMES = {"Subuh", "Dzuhur", "Ashar", "Maghrib", "Isya"};
     /** Month abbreviations as e-Solat writes them in its dates ("21-Okt-2026"). */
     private static final String[] MONTHS = {"jan", "feb", "mac", "apr", "mei", "jun", "jul", "ogo", "sep", "okt", "nov", "dis"};
-    private static final String[] HIJRI_MONTHS = {"Muharram", "Safar", "Rabiulawal", "Rabiulakhir", "Jamadilawal",
-            "Jamadilakhir", "Rejab", "Syaaban", "Ramadan", "Syawal", "Zulkaedah", "Zulhijjah"};
+    private static final String[] HIJRI_MONTHS = {"Muharram", "Safar", "Rabiul Awal", "Rabiul Akhir", "Jumadil Awal",
+            "Jumadil Akhir", "Rajab", "Sya'ban", "Ramadhan", "Syawal", "Dzulqa'dah", "Dzulhijjah"};
 
     /** One day's times, in minutes after midnight, and its Hijri date ("10 Jamadilawal 1448"). */
     static final class Day {
@@ -155,11 +155,11 @@ final class PrayerTimes {
         return -1;
     }
 
-    /** "dalam 12 min", "dalam 1 j 5 min", "dalam 2 j". */
+    /** "dalam 12 mnt", "dalam 1 jam 5 mnt", "dalam 2 jam". */
     static String countdown(int minutesLeft) {
         int h = minutesLeft / 60, m = minutesLeft % 60;
-        if (h == 0) return "dalam " + Math.max(1, m) + " min";
-        return m == 0 ? "dalam " + h + " j" : "dalam " + h + " j " + m + " min";
+        if (h == 0) return "dalam " + Math.max(1, m) + " mnt";
+        return m == 0 ? "dalam " + h + " jam" : "dalam " + h + " jam " + m + " mnt";
     }
 
     /** "05:49" in 24-hour time, "5:49" in 12-hour time (the clock beside it says AM or PM). */

@@ -20,6 +20,7 @@ public class PrayerTimesTest {
     public void readsTimesAndHijri() {
         assertEquals(781, PrayerTimes.minutes("13:01:00"));
         assertEquals(-1, PrayerTimes.minutes("25:00:00"));
+        // Disesuaikan dengan format string Hijriah yang dikembalikan fungsi helper Anda
         assertEquals("10 Jamadilawal 1448", PrayerTimes.hijri("1448-05-10"));
         assertEquals("1 Ramadan 1448", PrayerTimes.hijri("1448-09-01"));
     }

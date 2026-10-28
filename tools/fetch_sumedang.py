@@ -26,7 +26,7 @@ def add_minutes(time_str, minutes_to_add):
 
 for year in [2026, 2027]:
     for m in range(1, 13):
-        url = f"https://api.aladhan.com/v1/calendar/{year}/{m}?latitude=-6.8584&longitude=107.9266&method=20"
+        url = f"https://api.aladhan.com/v1/calendar/{year}/{m}?latitude=-6.2088&longitude=106.8456&method=20"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         res = urllib.request.urlopen(req)
         data = json.loads(res.read().decode())["data"]
@@ -53,7 +53,7 @@ for year in [2026, 2027]:
             }
             all_days.append(entry)
 
-out_file = r"C:\Users\cyxor\.gemini\antigravity\scratch\cleartv-Islamic\themes\islamik\solat-SMD01.json"
+out_file = r"C:\Users\cyxor\.gemini\antigravity\scratch\cleartv-Islamic\themes\islamik\solat-JKT01.json"
 with open(out_file, "w", encoding="utf-8") as f:
     json.dump(all_days, f, separators=(',', ':'))
 

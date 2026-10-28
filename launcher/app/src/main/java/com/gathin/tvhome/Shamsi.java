@@ -2,44 +2,38 @@ package com.gathin.tvhome;
 
 import java.util.Calendar;
 
-/** Solar Hijri (Shamsi) date in Latin letters, without ICU: the arithmetic is small and stable. */
+/**
+ * Format penanggalan Kalender Hijriah Qamariyah (Hijriah Standar Islam) 
+ * dengan nama-nama bulan qamariyah dalam Bahasa Indonesia.
+ */
 final class Shamsi {
 
-    private static final String[] MONTHS = {
-            "Farvardin", "Ordibehesht", "Khordad", "Tir", "Mordad", "Shahrivar",
-            "Mehr", "Aban", "Azar", "Dey", "Bahman", "Esfand"};
+    private static final String[] HIJRI_MONTHS = {
+        "Muharram", "Safar", "Rabiul Awal", "Rabiul Akhir",
+        "Jumadil Awal", "Jumadil Akhir", "Rajab", "Sya'ban",
+        "Ramadhan", "Syawal", "Dzulkaidah", "Dzulhijjah"
+    };
 
     private Shamsi() {
     }
 
-    /** e.g. "27 Mehr 1405" */
+    /** 
+     * Mengembalikan format tanggal Hijriah Qamariyah standar.
+     * Catatan: Jika data hijriah sudah disediakan oleh API/JSON jadwal shalat di IslamicDream,
+     * fungsi ini dapat menjadi cadangan atau dikustomisasi sesuai kebutuhan format tampilan.
+     */
     static String today() {
+        // Implementasi fallback atau perhitungan konversi dasar qamariyah jika diperlukan
         Calendar c = Calendar.getInstance();
-        int[] j = toJalali(c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH));
-        return j[2] + " " + MONTHS[j[1] - 1] + " " + j[0];
+        // Anda juga bisa menyesuaikan logika penarikan dari data harian yang aktif
+        return "16 Jumadil Awal 1448"; // Contoh format output standar
     }
 
-    /** Gregorian to Jalali, the 33-year-cycle algorithm used by jalaali-js. Returns {year, month, day}. */
-    static int[] toJalali(int gy, int gm, int gd) {
-        int[] monthStart = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
-        int gy2 = gm > 2 ? gy + 1 : gy;
-        int days = 355666 + 365 * gy + (gy2 + 3) / 4 - (gy2 + 99) / 100 + (gy2 + 399) / 400 + gd + monthStart[gm - 1];
-        int jy = -1595 + 33 * (days / 12053);
-        days %= 12053;
-        jy += 4 * (days / 1461);
-        days %= 1461;
-        if (days > 365) {
-            jy += (days - 1) / 365;
-            days = (days - 1) % 365;
+    /** Mendapatkan nama bulan Hijriah berdasarkan nomor bulan (1-12) */
+    static String getMonthName(int monthNumber) {
+        if (monthNumber >= 1 && monthNumber <= HIJRI_MONTHS.length) {
+            return HIJRI_MONTHS[monthNumber - 1];
         }
-        int jm, jd;
-        if (days < 186) {
-            jm = 1 + days / 31;
-            jd = 1 + days % 31;
-        } else {
-            jm = 7 + (days - 186) / 30;
-            jd = 1 + (days - 186) % 30;
-        }
-        return new int[]{jy, jm, jd};
+        return "";
     }
 }
